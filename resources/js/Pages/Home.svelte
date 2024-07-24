@@ -87,30 +87,69 @@
             });
         });
     }
+
+    function resetForm() {
+        inputText = "";
+        outputText = "";
+        showCopyButton = false;
+    }
 </script>
 
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Encriptador de Texto</h1>
-    <div class="form-group">
-        <textarea
-            bind:value={inputText}
-            placeholder="Ingrese un texto aquí"
-            class="form-control mb-3"
-            rows="4"
-        ></textarea>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+    * {
+        font-family: "Inter", sans-serif;
+    }
+</style>
+
+<main class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4-text-center">
+            <img src="./assets/img/Vector.png" alt="Logo app" class="img-fluid mb-3">
+            <h1 class="text-center mb-4">
+                <i class="fa-solid fa-key"></i>
+                Encriptador de Texto
+            </h1>
+            <textarea
+                bind:value={inputText}
+                placeholder="Ingrese un texto aquí"
+                class="form-control mb-3 p-4 text-center"
+                rows="4"
+            ></textarea>
+            <div class="alert alert-info" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Solo letras minúsculas y sin acentos.
+            </div>
+            <div class="d-flex gap-2 justify-content-center align-items-center">
+                <div class="p-2">
+                    <button class="btn btn-outline-success btn-lg px-4" on:click={encryptText}>
+                        <i class="fas fa-user-secret"></i> Encriptar
+                    </button>
+                </div>
+                <div class="p-2">
+                    <button class="btn btn-outline-primary btn-lg" on:click={decryptText}>
+                        <i class="fas fa-gear"></i> Desencriptar
+                    </button>
+                </div>
+            </div>
+            <textarea
+                bind:value={outputText}
+                class="form-control text-center m-3 p-4"
+                readonly
+                rows="4"
+                placeholder="Ningún mensaje fue encontrado"
+            ></textarea>
+            {#if showCopyButton}
+            <div class="d-flex gap-2 mb-3 justify-content-center align-items-center">
+                <button class="btn btn-outline-primary btn-lg mt-3 " on:click={copyText}>
+                    <i class="far fa-copy"></i> Copiar
+                </button>
+                <button class="btn btn-outline-danger btn-lg mt-3" on:click={resetForm}>
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Reset
+                </button>
+            </div>
+            {/if}
+        </div>
     </div>
-    <div class="d-flex justify-content-between mb-3">
-        <button class="btn btn-primary" on:click={encryptText}>Encriptar</button
-        >
-        <button class="btn btn-secondary" on:click={decryptText}
-            >Desencriptar</button
-        >
-    </div>
-    <div class="textarea {outputText ? 'has-text' : ''}">
-        <textarea bind:value={outputText} class="form-control" readonly rows="4"
-        ></textarea>
-    </div>
-    {#if showCopyButton}
-        <button class="btn btn-info mt-3" on:click={copyText}>Copiar</button>
-    {/if}
-</div>
+</main>
