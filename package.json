@@ -6,8 +6,17 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@sveltejs/vite-plugin-svelte": "^3.0.2",
+        "autoprefixer": "^10.4.14",
         "axios": "^1.6.4",
+        "daisyui": "^4.6.0",
         "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.4.26",
+        "svelte": "^4.0.5",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "@inertiajs/svelte": "^1.0.9",
+        "sweetalert2": "^11.12.3"
     }
 }
