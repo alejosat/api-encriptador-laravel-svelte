@@ -16,6 +16,16 @@
                 body: JSON.stringify({ text: inputText }),
             });
             const data = await response.json();
+
+            if (!inputText) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Debes introducir un texto para encriptar.",
+                });
+                return;
+            }
+
             if (response.ok) {
                 outputText = data.text;
                 showCopyButton = true;
@@ -51,6 +61,16 @@
                 body: JSON.stringify({ text: inputText }),
             });
             const data = await response.json();
+
+            if (!inputText) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Debes introducir un texto para desencriptar.",
+                });
+                return;
+            }
+
             if (response.ok) {
                 outputText = data.text;
                 showCopyButton = true;
@@ -103,7 +123,7 @@
     }
 </style>
 
-<main class="container my-4">
+<main class="container d-flex justify-content-center align-items-center my-4 p-4">
     <div class="row justify-content-center">
         <div class="col-md-4-text-center">
             <img src="./assets/img/Vector.png" alt="Logo app" class="img-fluid mb-3">
@@ -118,7 +138,8 @@
                 rows="4"
             ></textarea>
             <div class="alert alert-info" role="alert">
-                <i class="fas fa-exclamation-circle"></i> Solo letras minúsculas y sin acentos.
+                <i class="fas fa-exclamation-circle">
+                </i> Solo letras minúsculas y sin acentos.
             </div>
             <div class="d-flex gap-2 justify-content-center align-items-center">
                 <div class="p-2">
@@ -134,17 +155,17 @@
             </div>
             <textarea
                 bind:value={outputText}
-                class="form-control text-center m-3 p-4"
+                class="form-control text-center mb-3 mt-2 p-4"
                 readonly
                 rows="4"
                 placeholder="Ningún mensaje fue encontrado"
             ></textarea>
             {#if showCopyButton}
             <div class="d-flex gap-2 mb-3 justify-content-center align-items-center">
-                <button class="btn btn-outline-primary btn-lg mt-3 " on:click={copyText}>
+                <button class="btn btn-outline-primary btn-lg" on:click={copyText}>
                     <i class="far fa-copy"></i> Copiar
                 </button>
-                <button class="btn btn-outline-danger btn-lg mt-3" on:click={resetForm}>
+                <button class="btn btn-outline-danger btn-lg" on:click={resetForm}>
                     <i class="fa-solid fa-rotate-right"></i>
                     Reset
                 </button>
